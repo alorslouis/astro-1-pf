@@ -15,12 +15,18 @@ const projects = await Astro.glob("./projects/**/*.md");
 		</p>
 		<a href="/projects/1">test</a>
 
+<section>
+<h2>Projects</h2>
+
 {projects.map((project) => {
-	return <div>
-		<a href={`${project.url}`}>
-		<p>{project.frontmatter.title}</p></a>
+	return <div class="p-4 my-2 text-white bg-slate-800 rounded-md hover:-translate-y-1 ease-linear transition-all">
+			<a href={`${project.url}`}>
+				<h3 class="text-xl">{project.frontmatter.title}</h3>
+				<p>{project.frontmatter.tags.map((tag: string) => <p>{tag}</p>)}</p>
+			</a>
 		</div>
 })}
+</section>
 
 		<ul role="list" class="link-card-grid">
 			<Card
