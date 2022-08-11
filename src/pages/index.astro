@@ -1,6 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+const projects = await Astro.glob("./projects/**/*.md");
+
 ---
 
 <Layout title="Welcome to Astro.">
@@ -10,6 +13,15 @@ import Card from '../components/Card.astro';
 			Check out the <code>src/pages</code> directory to get started.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
+		<a href="/projects/1">test</a>
+
+{projects.map((project) => {
+	return <div>
+		<a href={`${project.url}`}>
+		<p>{project.frontmatter.title}</p></a>
+		</div>
+})}
+
 		<ul role="list" class="link-card-grid">
 			<Card
 				href="https://docs.astro.build/"
