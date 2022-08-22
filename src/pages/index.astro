@@ -1,32 +1,70 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 
 const projects = await Astro.glob("./projects/**/*.md");
 
+interface Md {
+	title: string;
+	layout: string;
+	tags: string[];
+}
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-	<h1 class="text-center">Willkommen auf den seite der <span class="text-8xl font-black">lew</span></h1>
-		<p class="instructions">
-			Check out the <code>src/pages</code> directory to get started.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+		<h1 class="text-center">
+			Willkommen auf den seite der <span class="text-8xl font-black"
+				>lew
+			</span>
+		</h1>
+		<p class="text-center font-mono text-lg">
+			fullstack dev • san diego ca • bootstrapper
 		</p>
-		<a href="/projects/1">test</a>
 
-<section>
-<h2>Projects</h2>
+		<section class="container mx-auto my-4">
+			<h2>Projects</h2>
 
-{projects.map((project) => {
-	return <div class="p-4 my-2 text-white bg-slate-800 rounded-md hover:-translate-y-1 ease-linear transition-all">
-			<a href={`${project.url}`}>
-				<h3 class="text-xl">{project.frontmatter.title}</h3>
-				<p>{project.frontmatter.tags.map((tag: string) => <p>{tag}</p>)}</p>
-			</a>
-		</div>
-})}
-</section>
+			{
+				projects.map((project) => {
+					return (
+						<a href={`${project.url}`}>
+							<div class="p-4 my-2 text-white bg-slate-800 rounded-md hover:-translate-y-1 ease-linear transition-all">
+								<h3>{project.frontmatter.title}</h3>
+								<div class="flex">
+									{project.frontmatter.tags.map((tag) => (
+										<p class="p-2 m-2 border rounded-md">
+											{tag}
+										</p>
+									))}
+								</div>
+							</div>
+						</a>
+					);
+				})
+			}
+
+			<!-- {
+				projects.map((project) => {
+					return (
+						<div class="p-4 my-2 text-white bg-slate-800 rounded-md hover:-translate-y-1 ease-linear transition-all">
+							<a href={`${project.url}`}>
+								<h3 class="text-xl">
+									{project.frontmatter.title}
+								</h3>
+								<div>
+									{project.frontmatter.tags.map(
+										(tag: string) => (
+											<p>{tag}</p>
+										)
+									)}
+								</div>
+							</a>
+						</div>
+					);
+				});
+			} -->
+		</section>
 
 		<ul role="list" class="link-card-grid">
 			<Card

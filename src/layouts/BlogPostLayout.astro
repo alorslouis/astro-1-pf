@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+    <div class="container mx-auto p-2 my-10">
+        <h1 class="text-xl font-bold">{frontmatter.title}</h1>
+        <div>
+            {
+                frontmatter.tags.map((t) => {
+                    return <span class="p-4">{t}</span>;
+                })
+            }
+        </div>
+
+        <slot />
+    </div>
+</BaseLayout>
